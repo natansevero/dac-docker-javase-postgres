@@ -1,0 +1,11 @@
+FROM postgres
+MAINTAINER Natan Severo <natanseverolp@gmail.com>
+
+ENV POSTGRES_USER postgres
+ENV POSTGRES_PASSWORD 12345
+ENV POSTGRES_DB loja
+
+COPY tabela.sql /docker-entrypoint-initdb.d/
+# COPY dados.sql /docker-entrypoint-initdb.d/ 
+
+
