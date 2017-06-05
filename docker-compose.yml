@@ -1,15 +1,19 @@
-version: '2'
+version: '2.1'
 services:
+    app:
+        build: .
+        image: natan/deskapp_compose
+        container_name: deskapp_compose
+        depends_on:
+            postgres:
+                condition: service_healthy
+        links:
+            - "postgres:banco-loja"
     postgres:
         build: ./postgres
         image: natan/banco_compose
         container_name: banco_compose
         ports:
             - "5434:5432"
-    app:
-        build: .
-        image: natan/deskapp_compose
-        container_name: deskapp_compose 
-        links: 
-            - "postgres:banco-loja"
-    
+        healthcheck:
+            test: "exit 0"
